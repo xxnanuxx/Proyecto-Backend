@@ -1,14 +1,17 @@
-import { DataTypes as DT} from "sequelize";
+import { DataTypes as DT } from "sequelize";
 import connectionDb from "../connectionDb/connectionDb.js";
 
-const Role = connectionDb.define("Role", {
-    roleName:{
-        type:DT.STRING,
-        defaultValue:"user",
+const Role = connectionDb.define(
+  "Role",
+  {
+    roleName: {
+      type: DT.STRING,
+      defaultValue: "user",
     },
-},
-{
-    timestamps:false
-})
+  },
+  {
+    timestamps: false,
+  }
+);
 
 export default Role;
