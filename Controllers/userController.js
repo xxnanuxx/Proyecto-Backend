@@ -9,7 +9,6 @@ class UserController {
         include: [
           {
             model: Role,
-            as: "role",
             attributes: ["roleName"],
           },
         ],
@@ -27,7 +26,13 @@ class UserController {
         where: {
           id: id,
         },
-        attributes: ["id", "userName", "userLastName"],
+        attributes: ["id", "nombre", "apellido", "email"],
+        include: [
+          {
+            model: Role,
+            attributes: ["roleName"],
+          },
+        ],
       });
       if (!result) throw new Error("No se encontro el  usuario");
       res.send({ success: true, message: "Usuario encontrado", result });
@@ -37,13 +42,22 @@ class UserController {
   };
   createUser = async (req, res, next) => {
     try {
-      const { nombre, apellido, password, email, role } = req.body;
+      const { nombre, apellido, password, email } = req.body;
+
+      let domain = email.split("@")[1];
+      let domainName = domain.substring(0, domain.indexOf("."));
+      let roleId = 2
+      
+      if (domainName == "admin") {
+        roleId = 1
+      }
+
       const result = await User.create({
         nombre,
         apellido,
         password,
         email,
-        role,
+        roleId,
       });
       if (!result.dataValues) throw new Error("No se pudo crear el usuario");
       res

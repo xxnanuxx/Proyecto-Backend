@@ -1,18 +1,15 @@
 import { DataTypes as DT, Model } from "sequelize";
 import connectionDb from "../connectionDb/connectionDb.js";
 
-class Category extends Model {}
-
-Category.init(
+const Category = connectionDb.define(
+  "Category",
   {
     categoryName: {
-      type: DT.STRING(50),
-      allowNull: false,
+      type: DT.STRING
     },
   },
   {
-    sequelize: connectionDb,
-    modelName:"Category"
+    timestamps: false,
   }
 );
 
