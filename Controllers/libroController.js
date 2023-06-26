@@ -80,6 +80,33 @@ class LibroController {
           res.status(400).send({ success: false, result: error.message });
         }
     };
+    updateLibro = async (req, res, next) => {
+      try {
+        const { titulo, autor, stock, precio, imagen, categoria} = req.body
+        const result = await Libro.findOne({
+          where: {
+            id: id,
+          },
+        });
+        result = await result.update({
+
+        })
+      } catch (error) {
+        
+      }
+    };
+    deleteLibro = async (req, res, next) => {
+      try {
+        const { id } = req.params
+        const result = await Libro.destroy({
+          where:{
+            id: id,
+          }
+        });
+      } catch (error) {
+        res.status(400).send({ success: false, result: error.message });
+      }
+    }
 }
 
 export default LibroController

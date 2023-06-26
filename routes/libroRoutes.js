@@ -8,5 +8,6 @@ libroRoutes.get("/", libroController.getAllLibros)
 libroRoutes.get("/categoria", libroController.getLibrosByCategoria)
 libroRoutes.get("/:id", libroController.getLibroById)
 libroRoutes.post("/", libroController.createLibro)
+libroRoutes.post("/:id", libroController.deleteLibro)
 
 export default libroRoutes
